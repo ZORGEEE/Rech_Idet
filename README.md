@@ -12,3 +12,5 @@
 `control + C`
 6. деактивируй виртуальное окружение
 `deactivate`
+
+`gunicorn app:app --bind 0.0.0.0:10000`
