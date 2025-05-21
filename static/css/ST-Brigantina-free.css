@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'ST-Brigantina-free';
+	src: url(../../assets/fonts/STBrigantinafreeRegular.woff2) format('woff2'),
+	url(../../assets/fonts/STBrigantinafreeRegular.woff) format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
