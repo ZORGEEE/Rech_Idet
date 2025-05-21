@@ -28,27 +28,31 @@ def find():
 def search_result():
     if request.method == 'POST':
         # Get form data
-        construction = request.form.get('construction', '')
-        place = request.form.get('place', '')
-        intention = request.form.get('intention', '')
-        emotion = request.form.get('emotion', '')
+        mwu = request.form.get('mwu', '')
+        context = request.form.get('context', '')
+        roles = request.form.get('roles', '')
+        expression = request.form.get('expression', '')
+        sound = request.form.get('sound', '')
         
         # Build the query dynamically based on provided filters
         query = 'SELECT * FROM search_results WHERE 1=1'
         params = []
         
-        if construction:
-            query += ' AND construction = ?'
-            params.append(construction)
-        if place:
-            query += ' AND place = ?'
-            params.append(place)
-        if intention:
-            query += ' AND intention = ?'
-            params.append(intention)
-        if emotion:
-            query += ' AND emotion = ?'
-            params.append(emotion)
+        if mwu:
+            query += ' AND mwu = ?'
+            params.append(mwu)
+        if context:
+            query += ' AND context = ?'
+            params.append(context)
+        if roles:
+            query += ' AND roles = ?'
+            params.append(roles)
+        if expression:
+            query += ' AND expression = ?'
+            params.append(expression)
+        if sound:
+            query += 'AND sound = ?'
+            params.append(sound)
         
         # Execute query
         conn = get_db_connection()

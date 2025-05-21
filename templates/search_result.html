@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>site1</title>
-    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bellota+Text&amp;display=swap">
-    <link rel="stylesheet" href="../static/css/ST-Brigantina-free.css">
-    <link rel="stylesheet" href="../static/css/Filter.css">
-    <link rel="stylesheet" href="../static/css/Navbar-Centered-Brand-icons.css">
-    <link rel="stylesheet" href="../static/css/NZSearchFilterClear.css">
+    <link rel="stylesheet" href="static/css/ST-Brigantina-free.css">
+    <link rel="stylesheet" href="static/css/Banner-Heading-Image-images.css">
+    <link rel="stylesheet" href="static/css/Filter.css">
+    <link rel="stylesheet" href="static/css/Navbar-Centered-Brand-icons.css">
+    <link rel="stylesheet" href="static/css/NZSearchFilterClear.css">
 </head>
 
 <body>
@@ -19,7 +20,7 @@
         <div class="container-fluid"><span
                 class="text-center d-sm-flex align-items-center align-content-center m-auto align-items-sm-center"
                 style="font-family: ST-Brigantina-free;/*display: inline-flex;*//*overflow: visible;*/transform: perspective(0px) translate(0px) rotate(0deg) rotateY(0deg) scale(2.47) skew(0deg);/*filter: hue-rotate(0deg) invert(0%) sepia(0%);*/transform-origin: center;/*text-shadow: 0px 0px;*/color: #303f9f;font-size: 24px;position: relative;text-align: center;margin-right: -17px;padding-right: 0px;margin-left: -20px;padding-left: 0px;">Речь&nbsp;<img
-                    src="../static/img/Логотип%201.svg" style="height: 30px;">&nbsp;идёт<a class="stretched-link"
+                    src="static/img/Логотип%201.svg" style="height: 30px;">&nbsp;идёт<a class="stretched-link"
                     href="/"></a></span><button data-bs-toggle="collapse" class="navbar-toggler"
                 data-bs-target="#navcol-4" style="margin-left: 0px;"><span class="visually-hidden">Toggle
                     navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -29,7 +30,7 @@
                             style="font-family: ST-Brigantina-free;font-size: 35px;color: #303f9f;">Преподавателям</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/contacts"
-                            style="font-size: 35px;font-family: ST-Brigantina-free;color: #303f9f;">Контакты</a></li>
+                            style="font-size: 35px;font-family: ST-Brigantina-free;color: #303f9f;">о проекте</a></li>
                 </ul>
                 <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Button</button><button
                         class="btn btn-primary" type="button">Button</button></div><span class="navbar-text"></span>
@@ -44,40 +45,50 @@
     </nav>
     <div class="filter">
         <form method="post" action="/search_result">
-            <select name="construction"
-                style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Конструкция</option>
-                <option value="Без разницы">Без разницы</option>
+            <select name="mwu"
+                style="color: #09093e;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="">Выбрать</option>
+                <option value="Да ладно">Да ладно</option>
                 <option value="Все равно">Все равно</option>
                 <option value="Сто процентов">Сто процентов</option>
                 <option value="Ни в коем случае">Ни в коем случае</option>
                 <option value="Грубо говоря">Грубо говоря</option>
             </select>
 
-            <select name="place"
+            <select name="context"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Место</option>
-                <option value="На работе">На работе</option>
-                <option value="На учебе">На учебе</option>
-                <option value="Дома">Дома</option>
-                <option value="На улице">На улице</option>
+                <option value="">Контекст</option>
+                <option value="Бытовой">Бытовой</option>
+                <option value="Деловой">Деловой</option>
+                <option value="Учебный">Учебный</option>
+                <option value="В городе">В городе</option>
             </select>
 
-            <select name="intention"
+            <select name="roles"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Намерение</option>
-                <option value="Начало">Начало</option>
-                <option value="Желание">Желание</option>
-                <option value="Отказ">Отказ</option>
-                <option value="Не определено">Не определено</option>
+                <option value="">Собеседник</option>
+                <option value="Родители">Родители</option>
+                <option value="Друзья">Друзья</option>
+                <option value="Коллеги">Коллеги</option>
+                <option value="Клиент/сервис">Клиент/сервис</option>
             </select>
 
-            <select name="emotion"
-                style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 2px;">
-                <option value="">Эмоция</option>
+            <select name="expression"
+                style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="">Как выразить</option>
+                <option value="Негатив">Негатив</option>
+                <option value="Позитив">Позитив</option>
                 <option value="Удивление">Удивление</option>
-                <option value="Радость">Радость</option>
-                <option value="Не определено">Не определено</option>
+                <option value="Отказ">Отказ</option>
+                <option value="Согласие">Согласие</option>
+            </select>
+
+            <select name="sound"
+                style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="">Звук</option>
+                <option value="Со звуком">Со звуком</option>
+                <option value="Без звука">Без звука</option>
+                <option value="Все">Все</option>
             </select>
 
             <div class="container-fluid py-4 py-xl-5" style="height: 30px;padding-top: 0px;">
@@ -103,14 +114,17 @@
                                 style="color: var(--bs-black);font-family: 'Bellota Text', serif;text-align: left;">
                                 <span style="color: rgb(33, 33, 33);">
                                     Результаты поиска по запросу:
-                                    {% if request.form.get('construction') %}конструкция: {{
-                                    request.form.get('construction') }}{% endif %}
-                                    {% if request.form.get('place') %}; место: {{ request.form.get('place') }}{% endif
+                                    {% if request.form.get('mwu') %}конструкция: {{
+                                    request.form.get('mwu') }}{% endif %}
+                                    {% if request.form.get('context') %}; контекст: {{ request.form.get('context') }}{%
+                                    endif
                                     %}
-                                    {% if request.form.get('intention') %}; намерение: {{ request.form.get('intention')
+                                    {% if request.form.get('roles') %}; собеседник: {{ request.form.get('roles')
                                     }}{% endif %}
-                                    {% if request.form.get('emotion') %}; эмоция: {{ request.form.get('emotion') }}{%
+                                    {% if request.form.get('expression') %}; эмоция: {{ request.form.get('expression')
+                                    }}{%
                                     endif %}
+                                    {% if request.form.get('sound') %}; звук: {{ request.form.get('sound')}}{% endif %}
                                 </span>
                             </p>
                         </div>
@@ -121,13 +135,9 @@
                                         <tr>
                                             <th class="text-center"
                                                 style="font-family: 'Bellota Text', serif;color: var(--bs-black);width: 125px;">
-                                                Конструкция</th>
+                                            </th>
                                             <th class="text-center"
-                                                style="font-family: 'Bellota Text', serif;width: 125px;">Место</th>
-                                            <th class="text-center"
-                                                style="font-family: 'Bellota Text', serif;width: 125px;">Намерение</th>
-                                            <th class="text-center"
-                                                style="font-family: 'Bellota Text', serif;width: 125px;">Эмоция</th>
+                                                style="font-family: 'Bellota Text', serif;width: 125px;">Значение</th>
                                             <th class="text-center"
                                                 style="font-family: 'Bellota Text', serif;width: 300px;">Текст</th>
                                             <th class="text-center"
@@ -141,17 +151,15 @@
                                         {% if results %}
                                         {% for result in results %}
                                         <tr class="table-light">
-                                            <td>{{ result['construction'] }}</td>
-                                            <td>{{ result['place'] }}</td>
-                                            <td>{{ result['intention'] }}</td>
-                                            <td>{{ result['emotion'] }}</td>
+                                            <td>{{ result['mwu'] }}</td>
+                                            <td>{{ result['meaning'] }}</td>
                                             <td>{{ result['text'] }}</td>
                                             <td>{{ result['translation'] }}</td>
                                             <td>
                                                 <div class="row">
                                                     <audio controls style="width: 100%;max-width: 500px;">
                                                         <source
-                                                            src="{{ url_for('static', filename=result['audio_file']) }}"
+                                                            src="{{ url_for('static', filename=result['sound_path']) }}"
                                                             type="audio/mpeg">
                                                     </audio>
                                                 </div>
@@ -172,8 +180,8 @@
             </div>
         </div>
     </section>
-    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../static/js/DataTable---Fully-BSS-Editable-style.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/js/DataTable---Fully-BSS-Editable-style.js"></script>
 </body>
 
 </html>
