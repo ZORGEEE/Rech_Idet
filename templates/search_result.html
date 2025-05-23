@@ -47,7 +47,7 @@
         <form method="post" action="/search_result">
             <select name="mwu"
                 style="color: #09093e;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Выбрать</option>
+                <option value="" disabled {% if not request.form.get('mwu') %}selected{% endif %}>Выбрать</option>
                 {% for value in filter_options['mwu'] %}
                 <option value="{{ value }}" {% if request.form.get('mwu')==value %}selected{% endif %}>{{ value }}
                 </option>
@@ -56,7 +56,7 @@
 
             <select name="context"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Контекст</option>
+                <option value="" disabled {% if not request.form.get('context') %}selected{% endif %}>Контекст</option>
                 {% for value in filter_options['context'] %}
                 <option value="{{ value }}" {% if request.form.get('context')==value %}selected{% endif %}>{{ value }}
                 </option>
@@ -65,7 +65,7 @@
 
             <select name="roles"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Собеседник</option>
+                <option value="" disabled {% if not request.form.get('roles') %}selected{% endif %}>Собеседник</option>
                 {% for value in filter_options['roles'] %}
                 <option value="{{ value }}" {% if request.form.get('roles')==value %}selected{% endif %}>{{ value }}
                 </option>
@@ -74,7 +74,8 @@
 
             <select name="expression"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Как выразить</option>
+                <option value="" disabled {% if not request.form.get('expression') %}selected{% endif %}>Как выразить
+                </option>
                 {% for value in filter_options['expression'] %}
                 <option value="{{ value }}" {% if request.form.get('expression')==value %}selected{% endif %}>{{ value
                     }}</option>
@@ -83,7 +84,7 @@
 
             <select name="sound"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
-                <option value="">Звук</option>
+                <option value="" disabled {% if not request.form.get('sound') %}selected{% endif %}>Звук</option>
                 {% for value in filter_options['sound'] %}
                 <option value="{{ value }}" {% if request.form.get('sound')==value %}selected{% endif %}>{{ value }}
                 </option>
@@ -152,35 +153,62 @@
                                         <tr class="table-light">
                                             <td>{{ result['mwu'] }}</td>
                                             <td>{{ result['meaning'] }}</td>
-                                            <td>{{ result['text'] }}</td>
-                                            <td>{{ result['translation'] }}</td>
                                             <td>
-                                                <div class="row">
+                                                <span href="#" style="cursor:pointer; display:block; text-align:left;"
+                                                    data-bs-toggle="modal" data-bs-target="#infoModal"
+                                                    data-context="{{ result['context'] }}"
+                                                    data-roles="{{ result['roles'] }}"
+                                                    data-comment="{{ result['comment'] }}" ">
+                                                    {{ result['text'] | safe }}
+                                                </span>
+                                            </td>
+                                            <td>{{ result['translation'] | safe }}</td>
+                                            <td>
+                                                <div class=" row">
                                                     <audio controls style="width: 100%;max-width: 500px;">
                                                         <source
                                                             src="{{ url_for('static', filename=result['sound_path']) }}"
                                                             type="audio/mpeg">
                                                     </audio>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                        {% else %}
-                                        <tr>
-                                            <td colspan="7" class="text-center">Результатов не найдено</td>
-                                        </tr>
-                                        {% endif %}
-                                    </tbody>
-                                </table>
                             </div>
+                            </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center">Результатов не найдено</td>
+                            </tr>
+                            {% endif %}
+                            </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Дополнительная информация</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Контекст:</strong> <span id="modal-context"></span></p>
+                    <p><strong>Собеседники:</strong> <span id="modal-roles"></span></p>
+                    <p id="modal-comment-block" style="display:none;"><strong>Комментарий:</strong> <span
+                            id="modal-comment"></span></p>
+                    <hr>
+                    <div id="modal-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
     <script src="static/js/DataTable---Fully-BSS-Editable-style.js"></script>
+    <script src="static/bootstrap/js/bootstrap.modal.js"></script>
 </body>
 
 </html>

@@ -11,9 +11,12 @@ def get_db_connection():
 def get_filter_options():
     conn = get_db_connection()
     filters = {}
-    for field in ['mwu', 'context', 'roles', 'expression', 'sound']:
+    for field in ['mwu', 'context', 'roles', 'sound']:
         rows = conn.execute(f"SELECT DISTINCT {field} FROM search_results WHERE {field} IS NOT NULL AND {field} != ''").fetchall()
         filters[field] = [row[field] for row in rows]
+    rows = conn.execute("SELECT DISTINCT expression FROM expressions WHERE expression IS NOT NULL AND expression != ''").fetchall()
+    filters['expression'] = [row['expression'] for row in rows]
+    filters['sound'] = ["Все", "Есть звук", "Нет звука"]
     conn.close()
     return filters
 
@@ -31,7 +34,8 @@ def for_tutors():
 
 @app.route("/find")
 def find():
-    return render_template("find.html")
+    filter_options = get_filter_options()
+    return render_template("find.html", filter_options=filter_options)
 
 @app.route("/search_result", methods=['GET', 'POST'])
 def search_result():
@@ -46,25 +50,38 @@ def search_result():
         sound = request.form.get('sound', '')
         
         # Build the query dynamically based on provided filters
-        query = 'SELECT * FROM search_results WHERE 1=1'
+        query = '''
+            SELECT sr.*
+            FROM search_results sr
+            LEFT JOIN expressions e ON sr.id = e.search_result_id
+            '''
+
+        wheres = ['1 = 1']
         params = []
         
         if mwu:
-            query += ' AND mwu = ?'
+            wheres.append('sr.mwu = ?')
             params.append(mwu)
         if context:
-            query += ' AND context = ?'
+            wheres.append('sr.context = ?')
             params.append(context)
         if roles:
-            query += ' AND roles = ?'
+            wheres.append('sr.roles = ?')
             params.append(roles)
         if expression:
-            query += ' AND expression = ?'
+            wheres.append('e.expression = ?')
             params.append(expression)
-        if sound:
-            query += 'AND sound = ?'
-            params.append(sound)
+        if sound == "Есть звук":
+            wheres.append('sr.sound = 1')
+        elif sound == "Нет звука":
+            wheres.append('sr.sound = 0')
+        # if sound:
+        #     wheres.append('sr.sound = ?')
+        #     params.append(sound)
         
+        query += ' WHERE ' + ' AND '.join(wheres)
+        query += ' GROUP BY sr.id'
+
         # Execute query
         conn = get_db_connection()
         results = conn.execute(query, params).fetchall()
