@@ -47,6 +47,7 @@
         <form method="post" action="/search_result">
             <select name="mwu"
                 style="color: #09093e;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="" {% if not request.form.get('mwu') %}selected{% endif %}>-</option>
                 <option value="" disabled {% if not request.form.get('mwu') %}selected{% endif %}>Выбрать</option>
                 {% for value in filter_options['mwu'] %}
                 <option value="{{ value }}" {% if request.form.get('mwu')==value %}selected{% endif %}>{{ value }}
@@ -56,6 +57,7 @@
 
             <select name="context"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="" {% if not request.form.get('context') %}selected{% endif %}>-</option>
                 <option value="" disabled {% if not request.form.get('context') %}selected{% endif %}>Контекст</option>
                 {% for value in filter_options['context'] %}
                 <option value="{{ value }}" {% if request.form.get('context')==value %}selected{% endif %}>{{ value }}
@@ -65,6 +67,7 @@
 
             <select name="roles"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="" {% if not request.form.get('roles') %}selected{% endif %}>-</option>
                 <option value="" disabled {% if not request.form.get('roles') %}selected{% endif %}>Собеседник</option>
                 {% for value in filter_options['roles'] %}
                 <option value="{{ value }}" {% if request.form.get('roles')==value %}selected{% endif %}>{{ value }}
@@ -74,6 +77,7 @@
 
             <select name="expression"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="" {% if not request.form.get('expression') %}selected{% endif %}>-</option>
                 <option value="" disabled {% if not request.form.get('expression') %}selected{% endif %}>Как выразить
                 </option>
                 {% for value in filter_options['expression'] %}
@@ -84,6 +88,7 @@
 
             <select name="sound"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
+                <option value="" {% if not request.form.get('sound') %}selected{% endif %}>-</option>
                 <option value="" disabled {% if not request.form.get('sound') %}selected{% endif %}>Звук</option>
                 {% for value in filter_options['sound'] %}
                 <option value="{{ value }}" {% if request.form.get('sound')==value %}selected{% endif %}>{{ value }}
@@ -114,17 +119,21 @@
                                 style="color: var(--bs-black);font-family: 'Bellota Text', serif;text-align: left;">
                                 <span style="color: rgb(33, 33, 33);">
                                     Результаты поиска по запросу:
-                                    {% if request.form.get('mwu') %}конструкция: {{
-                                    request.form.get('mwu') }}{% endif %}
-                                    {% if request.form.get('context') %}; контекст: {{ request.form.get('context') }}{%
+                                    {% if request.form.get('mwu') %} устойчивое сочетание: {{
+                                    request.form.get('mwu') + ';'}}{% endif %}
+                                    {% if request.form.get('context')%} контекст: {{ request.form.get('context') +
+                                    ';'}}{%
                                     endif
                                     %}
-                                    {% if request.form.get('roles') %}; собеседник: {{ request.form.get('roles')
+                                    {% if request.form.get('roles') %} собеседник: {{ request.form.get('roles') + ';'
                                     }}{% endif %}
-                                    {% if request.form.get('expression') %}; эмоция: {{ request.form.get('expression')
+                                    {% if request.form.get('expression') %} что выражает: {{
+                                    request.form.get('expression') +
+                                    ';'
                                     }}{%
                                     endif %}
-                                    {% if request.form.get('sound') %}; звук: {{ request.form.get('sound')}}{% endif %}
+                                    {% if request.form.get('sound') %} звук: {{ request.form.get('sound') + ';'}}{%
+                                    endif %}
                                 </span>
                             </p>
                         </div>
@@ -152,7 +161,7 @@
                                         {% for result in results %}
                                         <tr class="table-light">
                                             <td>{{ result['mwu'] }}</td>
-                                            <td>{{ result['meaning'] }}</td>
+                                            <td>{{ result['meaning'] | safe }}</td>
                                             <td>
                                                 <span href="#" style="cursor:pointer; display:block; text-align:left;"
                                                     data-bs-toggle="modal" data-bs-target="#infoModal"

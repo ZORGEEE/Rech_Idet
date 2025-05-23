@@ -16,7 +16,7 @@ def get_filter_options():
         filters[field] = [row[field] for row in rows]
     rows = conn.execute("SELECT DISTINCT expression FROM expressions WHERE expression IS NOT NULL AND expression != ''").fetchall()
     filters['expression'] = [row['expression'] for row in rows]
-    filters['sound'] = ["Все", "Есть звук", "Нет звука"]
+    filters['sound'] = ["Есть звук", "Нет звука"]
     conn.close()
     return filters
 
