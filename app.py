@@ -8,6 +8,15 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def get_filter_options():
+    conn = get_db_connection()
+    filters = {}
+    for field in ['mwu', 'context', 'roles', 'expression', 'sound']:
+        rows = conn.execute(f"SELECT DISTINCT {field} FROM search_results WHERE {field} IS NOT NULL AND {field} != ''").fetchall()
+        filters[field] = [row[field] for row in rows]
+    conn.close()
+    return filters
+
 @app.route("/")
 def home():
     return render_template("main.html")
@@ -26,6 +35,8 @@ def find():
 
 @app.route("/search_result", methods=['GET', 'POST'])
 def search_result():
+    filter_options = get_filter_options()
+    results = []
     if request.method == 'POST':
         # Get form data
         mwu = request.form.get('mwu', '')
@@ -63,9 +74,9 @@ def search_result():
         print(f"Params: {params}")  # Debug print
         print(f"Results: {results}")  # Debug print
         
-        return render_template("search_result.html", results=results, request=request)
+        return render_template("search_result.html", results=results, request=request, filter_options=filter_options)
     
-    return render_template("search_result.html", results=[], request=request)
+    return render_template("search_result.html", results=[], request=request, filter_options=filter_options)
 
 @app.route("/contacts")
 def contacts():

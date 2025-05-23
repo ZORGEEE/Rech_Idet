@@ -57,47 +57,41 @@
             <select name="mwu"
                 style="color: #09093e;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
                 <option value="">Выбрать</option>
-                <option value="Да ладно">Да ладно</option>
-                <option value="Все равно">Все равно</option>
-                <option value="Сто процентов">Сто процентов</option>
-                <option value="Ни в коем случае">Ни в коем случае</option>
-                <option value="Грубо говоря">Грубо говоря</option>
+                {% for value in filter_options['mwu'] %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
             </select>
 
             <select name="context"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
                 <option value="">Контекст</option>
-                <option value="Бытовой">Бытовой</option>
-                <option value="Деловой">Деловой</option>
-                <option value="Учебный">Учебный</option>
-                <option value="В городе">В городе</option>
+                {% for value in filter_options['context'] %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
             </select>
 
             <select name="roles"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
                 <option value="">Собеседник</option>
-                <option value="Родители">Родители</option>
-                <option value="Друзья">Друзья</option>
-                <option value="Коллеги">Коллеги</option>
-                <option value="Клиент/сервис">Клиент/сервис</option>
+                {% for value in filter_options['roles'] %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
             </select>
 
             <select name="expression"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
                 <option value="">Как выразить</option>
-                <option value="Негатив">Негатив</option>
-                <option value="Позитив">Позитив</option>
-                <option value="Удивление">Удивление</option>
-                <option value="Отказ">Отказ</option>
-                <option value="Согласие">Согласие</option>
+                {% for value in filter_options['expression'] %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
             </select>
 
             <select name="sound"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
                 <option value="">Звук</option>
-                <option value="Со звуком">Со звуком</option>
-                <option value="Без звука">Без звука</option>
-                <option value="Все">Все</option>
+                {% for value in filter_options['sound'] %}
+                <option value="{{ value }}">{{ value }}</option>
+                {% endfor %}
             </select>
 
             <div class="d-flex justify-content-center mt-3">
