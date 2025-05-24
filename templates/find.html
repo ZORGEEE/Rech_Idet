@@ -32,8 +32,13 @@
                     <li class="nav-item"><a class="nav-link" href="/contacts"
                             style="font-size: 35px;font-family: ST-Brigantina-free;color: #303f9f;">о проекте</a></li>
                 </ul>
-                <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Button</button><button
-                        class="btn btn-primary" type="button">Button</button></div><span class="navbar-text"></span>
+                <div class="d-md-none my-2"><a class="btn btn-light me-2" role="button"
+                        style="font-family: ST-Brigantina-free;font-size: 37px;color: #303f9f;border-color: #ffffff;background: rgba(197,202,233,0.5);"
+                        href="/instruction">Инструкция</a>
+                    <a class="btn btn-primary" role="button"
+                        style="font-size: 37px;font-family: ST-Brigantina-free;background: #303f9f;color: #ffffff;border-style: double;border-color: #303f9f;"
+                        href="/find">Искать</a>
+                </div><span class="navbar-text"></span>
             </div>
             <div class="d-none d-md-block"><a class="btn btn-light border rounded me-2" role="button"
                     style="font-family: ST-Brigantina-free;font-size: 37px;color: #303f9f;border-color: #ffffff;background: rgba(197,202,233,0.5);"
@@ -43,12 +48,14 @@
             </div><a href="#"></a>
         </div>
     </nav>
-    <div class="container py-4 py-xl-5" style="height: 175px;">
+    <div class="container py-4 py-xl-5">
         <div class="row mb-5">
-            <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <div class="col-md-8 col-xl-6 col-xxl-8 text-center mx-auto">
                 <h2 style="font-family: 'Bellota Text', serif;">Поиск</h2>
-                <p style="font-family: 'Bellota Text', serif;">Вы можете выбрать устойчивое сочетание, место разговора,
-                    намерение говорящего или эмоцию.</p>
+                <p style="font-family: 'Bellota Text', serif;">Здесь собраны фрагменты диалогов носителей русского
+                    языка. Чтобы найти нужные фрагменты, используйте фильтры: вы можете выбрать устойчивое сочетание,
+                    контекст, собеседников или посмотреть способы выражения разных эмоций и намерений. Чтобы получить
+                    фрагменты с аудиозаписями, выберите опцию "со звуком".</p>
             </div>
         </div>
     </div>
@@ -75,7 +82,7 @@
             <select name="roles"
                 style="color: #212121;font-size:20px; font-family:'Bellota Text', serif; text-align: center; width: auto; padding: 5px;">
                 <option value="" {% if not request.form.get('mwu') %}selected{% endif %}>-</option>
-                <option value="" disabled {% if not request.form.get('roles') %}selected{% endif %}>Собеседник</option>
+                <option value="" disabled {% if not request.form.get('roles') %}selected{% endif %}>Собеседники</option>
                 {% for value in filter_options['roles'] %}
                 <option value="{{ value }}">{{ value }}</option>
                 {% endfor %}
@@ -102,7 +109,7 @@
             </select>
 
             <div class="d-flex justify-content-center mt-3">
-                <button type="submit" class="btn btn-primary text-nowrap border-primary"
+                <button type="submit" class="btn btn-primary text-nowrap "
                     style="color: #ffffff;background: #3f51b5;font-family: 'Bellota Text', serif;font-size: 25px;">
                     Найти
                 </button>
